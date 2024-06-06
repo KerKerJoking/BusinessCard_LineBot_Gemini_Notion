@@ -1,0 +1,8 @@
+# 忽略 __pycache__ 目錄
+__pycache__/
+
+# 忽略 image 目錄
+image/
+
+# 忽略 config.json 文件
+config.json

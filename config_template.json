@@ -1,0 +1,7 @@
+{
+    "GOOGLE_API_KEY": "your_google_api_key_here",
+    "line_access_token": "your_line_access_token_here",
+    "line_secret": "your_line_secret_here",
+    "Notion_api": "your_notion_api_here",
+    "Notion_DB": "your_notion_db_here"
+}
