@@ -1,18 +1,17 @@
 import requests
 import logging
-from config import NOTION_API, NOTION_DB
 
-def Notion_Write(namecard_json, Namecard_ID):
+def Notion_Write(namecard_json, Namecard_ID, key, db):
     try:
         NOTION_API_url = 'https://api.notion.com/v1/pages'
         headers = {
-            "Authorization": f"Bearer {NOTION_API}",
+            "Authorization": f"Bearer {key}",
             "Content-Type": "application/json",
             "Notion-Version": "2022-06-28"
         }
 
         new_page = {
-            "parent": { "database_id": NOTION_DB },
+            "parent": { "database_id": db },
             "properties": {
                 "UUID":{
                     "title":[

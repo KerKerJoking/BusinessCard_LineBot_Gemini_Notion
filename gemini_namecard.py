@@ -2,11 +2,10 @@ import json
 import PIL.Image
 import google.generativeai as genai
 import logging
-from config import GOOGLE_API_KEY
 
-def Gemini_Namecard(img_path):
+def Gemini_Namecard(img_path,key):
     try:
-        genai.configure(api_key=GOOGLE_API_KEY)
+        genai.configure(api_key=key)
         model = genai.GenerativeModel('gemini-1.5-flash')
         ImagePrompt = "Here is a business card, and you are a business card secretary. Please organize the following information into JSON for me. If something is unclear, fill it with N/A. Only the JSON is needed:\n\nName, Title, Address, Email, Phone, Company.\n\nThe format for the Phone content should be #886-0123-456-789,1234. Ignore ,1234 if there is no extension.\n\nFor the same information in different languages, please put them in the same field separated by commas."
         img = PIL.Image.open(img_path)
