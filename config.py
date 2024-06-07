@@ -4,7 +4,7 @@ with open('config.json', 'r') as config_file:
     config = json.load(config_file)
 
 GOOGLE_API_KEY = config['GOOGLE_API_KEY']
-line_access_token = config['line_access_token']
-line_secret = config['line_secret']
-Notion_api = config['Notion_api']
-Notion_DB = config['Notion_DB']
+LINE_ACCESS_TOKEN = config['LINE_ACCESS_TOKEN']
+LINE_SECRET = config['LINE_SECRET']
+NOTION_API = config['NOTION_API']
+NOTION_DB = config['NOTION_DB']
