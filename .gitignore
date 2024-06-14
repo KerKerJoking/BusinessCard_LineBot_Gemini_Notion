@@ -6,3 +6,6 @@ image/
 
 # 忽略 config.json 文件
 config.json
+
+# 忽略 .env 文件
+.env
