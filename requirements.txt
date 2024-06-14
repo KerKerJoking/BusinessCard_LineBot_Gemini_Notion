@@ -1,0 +1,6 @@
+Flask
+line-bot-sdk
+requests
+python-dotenv
+Pillow
+google-generativeai

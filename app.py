@@ -102,8 +102,6 @@ def linebot():
     return 'OK'  # 驗證 Webhook 使用，不能省略
 
 if __name__ == "__main__":
-    with open('config.json', 'r') as config_file:
-        config = json.load(config_file)
     image_dir = 'image'
     if not os.path.exists(image_dir):
         os.makedirs(image_dir)

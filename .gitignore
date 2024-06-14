@@ -9,3 +9,6 @@ config.json
 
 # 忽略 .env 文件
 .env
+
+# 忽略 venv 目錄
+venv/
