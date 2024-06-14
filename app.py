@@ -4,8 +4,7 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.models import TextSendMessage
 from config import LINE_ACCESS_TOKEN, LINE_SECRET, GOOGLE_API_KEY, NOTION_API, NOTION_DB
 from gemini_namecard import Gemini_Namecard
-from notion_write import Notion_Write
-from notion_search import Notion_Search, Format_Notion_Results
+from notion_namecard import Notion_Write, Notion_Search, Format_Notion_Results
 
 # 配置日誌
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
