@@ -4,7 +4,7 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.models import TextSendMessage
 from config import LINE_ACCESS_TOKEN, LINE_SECRET, GOOGLE_API_KEY, NOTION_API, NOTION_DB
 from gemini_namecard import Gemini_Namecard
-from notion_namecard import Notion_Write, Notion_Search, Format_Notion_Results
+from notion_namecard import Notion_Write, Notion_Search, Notion_Delete, Notion_Edit, Format_Notion_Results
 
 # 配置日誌
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -30,12 +30,38 @@ def linebot():
         if type == 'text':
             msg = json_data['events'][0]['message']['text']  # 取得 LINE 收到的文字訊息
             logging.info("Received text message: %s", msg)
-            results = Notion_Search(msg, NOTION_API, NOTION_DB)  # 進行 Notion 搜尋
-            if results:
-                formatted_results = Format_Notion_Results(results)
-                reply = f"搜尋結果：\n{formatted_results}" if results else "沒有找到相關結果。"
+            if msg.startswith('/del '):
+                try:
+                    uuid = msg.split(' ')[1]
+                    success = Notion_Delete(uuid, NOTION_API, NOTION_DB)
+                    if success:
+                        reply = f"已成功刪除UUID: {uuid}"
+                    else:
+                        reply = f"刪除失敗，請確認UUID是否正確。"
+                except Exception as e:
+                    logging.error("Error deleting UUID: %s", e)
+                    reply = f"刪除失敗，請確認UUID是否正確。"
+            elif msg.startswith('/edit '):
+                try:
+                    parts = msg.split(' ', 3)
+                    uuid = parts[1]
+                    field = parts[2]
+                    payload = parts[3]
+                    success = Notion_Edit(uuid, field, payload, NOTION_API, NOTION_DB)
+                    if success:
+                        reply = f"已成功更新UUID: {uuid} 的 {field} 欄位"
+                    else:
+                        reply = f"更新失敗，請確認UUID和欄位是否正確。"
+                except Exception as e:
+                    logging.error("Error editing UUID: %s", e)
+                    reply = f"更新失敗，請確認UUID和欄位是否正確。"
             else:
-                reply = "沒有找到相關結果。"
+                results = Notion_Search(msg, NOTION_API, NOTION_DB)  # 進行 Notion 搜尋
+                if results:
+                    formatted_results = Format_Notion_Results(results)
+                    reply = f"搜尋結果：\n{formatted_results}" if results else "沒有找到相關結果。"
+                else:
+                    reply = "沒有找到相關結果。"
         elif type == 'image':
             msgID = json_data['events'][0]['message']['id']  # 取得訊息 id
             message_content = line_bot_api.get_message_content(msgID)  # 根據訊息 ID 取得訊息內容

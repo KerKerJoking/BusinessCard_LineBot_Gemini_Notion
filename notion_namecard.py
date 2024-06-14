@@ -158,6 +158,80 @@ def Notion_Search(query, key, db):
         logging.error("Notion search error: %s", e)
         return []
 
+def Notion_Delete(namecard_id, key, db):
+    try:
+        # 搜尋指定的UUID
+        results = Notion_Search(namecard_id, key, db)
+        if not results:
+            logging.error("No entry found with UUID: %s", namecard_id)
+            return False
+        
+        # 獲取頁面ID進行刪除
+        page_id = results[0]['id']
+        delete_url = f"https://api.notion.com/v1/blocks/{page_id}"
+        headers = {
+            "Authorization": f"Bearer {key}",
+            "Notion-Version": "2022-06-28"
+        }
+
+        response = requests.delete(delete_url, headers=headers)
+        if response.status_code == 200:
+            logging.info("Successfully deleted entry with UUID: %s", namecard_id)
+            return True
+        else:
+            logging.error("Failed to delete entry: %s", response.status_code)
+            logging.error(response.text)
+            return False
+    except Exception as e:
+        logging.error("Notion delete error: %s", e)
+        return False
+
+def Notion_Edit(namecard_id, field, payload, key, db):
+    try:
+        # 搜尋指定的UUID
+        results = Notion_Search(namecard_id, key, db)
+        if not results:
+            logging.error("No entry found with UUID: %s", namecard_id)
+            return False
+        
+        # 獲取頁面ID進行編輯
+        page_id = results[0]['id']
+        update_url = f"https://api.notion.com/v1/pages/{page_id}"
+        headers = {
+            "Authorization": f"Bearer {key}",
+            "Content-Type": "application/json",
+            "Notion-Version": "2022-06-28"
+        }
+        
+        # 建立更新的資料結構
+        properties = {
+            field: {
+                "rich_text": [
+                    {
+                        "text": {
+                            "content": payload
+                        }
+                    }
+                ]
+            }
+        }
+
+        data = {
+            "properties": properties
+        }
+
+        response = requests.patch(update_url, headers=headers, json=data)
+        if response.status_code == 200:
+            logging.info("Successfully updated entry with UUID: %s", namecard_id)
+            return True
+        else:
+            logging.error("Failed to update entry: %s", response.status_code)
+            logging.error(response.text)
+            return False
+    except Exception as e:
+        logging.error("Notion edit error: %s", e)
+        return False
+
 def Format_Notion_Results(results):
     formatted_results = []
     for result in results:
