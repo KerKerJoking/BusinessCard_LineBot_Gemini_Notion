@@ -72,7 +72,7 @@ Data Base 的 Tittle 欄位名稱改為 "UUID"，另外分別建立欄位： "Na
 
 ![配置 authtoken 及執行 ngrok](https://lh3.googleusercontent.com/pw/AP1GczPSMT6r_R77QlYUdbSnf_Hb-5AG_zzO5JB5DwNLgAouQ5mud0Clq5iD15d9UI7iFAFAYRcet8l7l83K4IgFNaOIO0x7rLhR8OwrUO8eSlPeyy03NHQByZ0PSTjPj8Qgcv2DWCzqOtK3mzSA-pnQl5mW=w1509-h393-s-no-gm?authuser=0)
 
-![ngrok 執行成功](https://lh3.googleusercontent.com/pw/AP1GczMuBNZRLiHY8Z5hRRA_D7XPw9J_H1YyByJl9wh3YpBeAlc9okUpoua4EOBINT6OSeOJci-aeG-gob8LrXuIvOvXkeJx0PI7pZoIRiMeVhngChC6Wy9JhLqoMVFnBoq4G0nP6Y
+![ngrok 執行成功](https://lh3.googleusercontent.com/pw/AP1GczMuBNZRLiHY8Z5hRRA_D7XPw9J_H1YyByJl9wh3YpBeAlc9okUpoua4EOBINT6OSeOJci-aeG-gob8LrXuIvOvXkeJx0PI7pZoIRiMeVhngChC6Wy9JhLqoMVFnBoq4G0nP6Y9UJkrJ5mtaFjmG11rU=w1452-h447-s-no-gm?authuser=0)
 
 ## 五、功能實測
 
